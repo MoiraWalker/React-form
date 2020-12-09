@@ -3,10 +3,9 @@ import { PetForm } from './components/organisms/petForm';
 
 function App() {
   return (
-      <>
-        <h1>Test</h1>
+      <div className='app'>
         <PetForm />
-      </>
+      </div>
   );
 }
 

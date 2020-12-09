@@ -1,11 +1,12 @@
 import React from 'react';
-import { Label, ErrorMessage } from "../../atoms";
+import { Label } from "../../atoms";
+import './index.css';
 
-export const TextArea = ({name, fieldRef, value, classStyle, label }) => {
+export const TextArea = ({name, placeholder, cols, rows, label }) => {
   return (
-      <div>
-          <Label name={name} classStyle={classStyle}>{label}</Label>
-          <textarea ref={fieldRef} id={name} name={name} />
+      <div className="text-area">
+          <Label name={name} >{label}</Label>
+          <textarea placeholder={placeholder} rows={rows} cols={{cols}} id={name} name={name} />
       </div>
   );
 };
