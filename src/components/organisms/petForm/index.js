@@ -4,16 +4,21 @@ import { Button, SelectOption } from '../../atoms';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useState } from 'react';
 import './index.css';
+import close from '../../../assets/close.svg';
 
 export const PetForm = () => {
-    const { register, unregister, watch, handleSubmit, ...methods } = useForm({
+    const { register, unregister, watch, reset, handleSubmit, ...methods } = useForm({
         mode: 'onChange'
     });
     const [sumbitSuccess, setSubmitSuccess] = useState(false);
 
-    function onFormSubmit(data) {
+    function onFormSubmit(data, e) {
         setSubmitSuccess(true);
-        console.log(data);
+        e.target.reset();
+    }
+
+    function onToaster(data) {
+        setSubmitSuccess(false);
     }
 
     const onError = (errorList) => {
@@ -32,7 +37,7 @@ export const PetForm = () => {
                      name="firstName"
                      label="First name"
                      type="text"
-                     fieldref={register({
+                     fieldRef={register({
                          required: {
                              value: true,
                              message: 'First name is required',
@@ -45,7 +50,7 @@ export const PetForm = () => {
                      name="lastName"
                      label="Last name"
                      type="text"
-                     fieldref={register({
+                     fieldRef={register({
                          required: {
                              value: true,
                              message: 'Last name is required',
@@ -57,8 +62,8 @@ export const PetForm = () => {
                  <InputField
                      type="number"
                      name="age"
-                     label="Age"
-                     fieldref={register({
+                     label="Leeftijd"
+                     fieldRef={register({
                          required: {
                              value: true,
                              message: 'Leeftijd is verplicht',
@@ -74,7 +79,7 @@ export const PetForm = () => {
                  <InputField
                      name="zipCode"
                      label="Postcode"
-                     fieldref={register({
+                     fieldRef={register({
                          required: {
                              value: true,
                              message: 'Postcode   is verplicht',
@@ -98,13 +103,26 @@ export const PetForm = () => {
                      }
                  })}
                  >
-                     <SelectOption value="cat">Cat</SelectOption>
-                     <SelectOption value="dog">Dog</SelectOption>
-                     <SelectOption value="hamster">Hamster</SelectOption>
-                     <SelectOption value="mouse">Mouse</SelectOption>
-                     <SelectOption value="different">Different</SelectOption>
+                     <SelectOption name="pets" value="cat">Cat</SelectOption>
+                     <SelectOption name="pets" value="dog">Dog</SelectOption>
+                     <SelectOption name="pets" value="hamster">Hamster</SelectOption>
+                     <SelectOption name="pets" value="mouse">Mouse</SelectOption>
+                     <SelectOption name="pets" value="different">Different</SelectOption>
                  </SelectBox>
-                 {selectedReferrer === "different" && <p>test</p> }
+                 {selectedReferrer === "different" &&
+                     <div className="input-different">
+                         <InputField
+                             name="input-different"
+                             label="Different pet"
+                             fieldRef={register({
+                                 required: {
+                                     value: true,
+                                     message: 'Pet is required',
+                                 },
+                             })}
+                         />
+                     </div>
+                  }
              </div>
              <div className="form-item">
                  <TextArea
@@ -119,6 +137,13 @@ export const PetForm = () => {
                      label="Terms and conditions"
                      name="checkbox"
                      id="details-checkbox"
+                     fieldRef={register({
+                         required: {
+                             value: true,
+                             message: 'Terms and Conditions are required',
+                         }
+                     })}
+
                  >Terms and conditions</CheckboxInput>
 
              </div>
@@ -127,9 +152,10 @@ export const PetForm = () => {
              </ButtonWrapper>
              </div>
              {sumbitSuccess &&
-             <div className="form-sent">
-                 <p>Form sent!</p>
-             </div>
+                 <div onAnimationEnd={onToaster}  className='form-sent'>
+                       <p className="form-sent-p">Form sent!</p>
+                       <img className="form-sent-img" src={close} width="15px " alt="close" />
+                 </div>
              }
          </form>
      </FormProvider>

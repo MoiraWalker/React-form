@@ -25,21 +25,33 @@ legend {
     text-align: center;
     animation-name: sent-animation;
     animation-duration: 2s;
-    opacity: 0;
-    /*position: absolute;*/
-    /*z-index: 1;*/
-    /*width: 320px;*/
-    /*top: 10px;*/
-    /*left: 10px;*/
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.form-sent-p{
+   margin-left: auto;
+
+}
+
+.form-sent-img{
+    margin-left: auto;
+
 }
 
 @keyframes sent-animation {
     0% {opacity: 0;}
     50% {opacity: 1;}
     100% {opacity: 0;}
+
 }
 
 .form-provider {
     display: flex;
     flex-direction: column;
+}
+
+.input-different{
+    margin-top: 20px;
 }

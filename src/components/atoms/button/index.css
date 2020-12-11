@@ -1,4 +1,4 @@
-button {
+.button-primary {
     padding: 10px 40px 10px 40px;
     background-color: lightcoral;
     font-size: 16px;
@@ -6,6 +6,6 @@ button {
     font-family: Bahnschrift;
 }
 
-button:hover {
+.button-primary:hover {
     background-color: indianred;
 }
